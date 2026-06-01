@@ -8,5 +8,5 @@ const HoldingsSchema = new Schema({
     net: String,
     day: String,
 });
-
+/*yaha pe check for errors later on */
 module.exports = {HoldingsSchema};
