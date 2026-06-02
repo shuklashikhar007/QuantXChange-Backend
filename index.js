@@ -17,13 +17,12 @@ const MONGODB_ATLAS_URL = process.env.MONGODB_URL;
 if (!MONGODB_ATLAS_URL) throw new Error("MONGODB_URL is not set in environment variables");
 
 const app = express();
-
 app.use(cors({
   origin: [
     "http://localhost:5173",
     "http://localhost:5174",
-    "https://quant-xchange-dash-board.vercel.app",
-    "https://quant-x-change-frontend.vercel.app/"   // ← replace with your auth frontend URL
+    "https://quant-x-change-frontend.vercel.app",      // ← auth frontend (from screenshot)
+    "https://quant-xchange-dash-board.vercel.app",     // ← dashboard
   ],
   credentials: true,
 }));
