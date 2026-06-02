@@ -23,7 +23,7 @@ app.use(cors({
     "http://localhost:5173",
     "http://localhost:5174",
     "https://quant-xchange-dash-board.vercel.app",
-    "https://your-auth-frontend.vercel.app"   // ← replace with your auth frontend URL
+    "https://quant-x-change-frontend.vercel.app/"   // ← replace with your auth frontend URL
   ],
   credentials: true,
 }));
