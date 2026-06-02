@@ -2,8 +2,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/UserModels"); 
 const { StatusCodes } = require("http-status-codes");
-
-const JWT_SECRET = process.env.JWT_SECRET || "yourSecretKey";
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) throw new Error("JWT_SECRET is not set in environment variables");
 
 const login = async (req, res) => {
   const { username, password } = req.body;
