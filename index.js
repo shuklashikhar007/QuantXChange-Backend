@@ -29,6 +29,12 @@ mongoose
     process.exit(1); // exit on DB failure so Vercel logs it clearly
   });
 
+  app.get("/", (req, res) => {
+  res.json({ 
+    status: "ok", 
+    message: "QuantXChange API is running 🚀"
+  });
+});
 app.use("/", authRoutes);
 app.use("/orders", ordersRoutes);
 
