@@ -18,7 +18,15 @@ if (!MONGODB_ATLAS_URL) throw new Error("MONGODB_URL is not set in environment v
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://quant-xchange-dash-board.vercel.app",
+    "https://your-auth-frontend.vercel.app"   // ← replace with your auth frontend URL
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 
 mongoose
