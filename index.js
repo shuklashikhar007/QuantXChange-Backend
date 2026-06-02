@@ -16,17 +16,31 @@ const MONGODB_ATLAS_URL = process.env.MONGODB_URL;
 
 if (!MONGODB_ATLAS_URL) throw new Error("MONGODB_URL is not set in environment variables");
 
-const app = express();
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://quant-x-change-frontend.vercel.app",
+  "https://quant-xchange-dash-board.vercel.app",
+];
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "https://quant-x-change-frontend.vercel.app",      // ← auth frontend (from screenshot)
-    "https://quant-xchange-dash-board.vercel.app",     // ← dashboard
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+
+    // Allow any Vercel preview deployment of your projects
+    if (
+      allowedOrigins.includes(origin) ||
+      origin.match(/https:\/\/quant-x-change-frontend.*\.vercel\.app/) ||
+      origin.match(/https:\/\/quant-xchange-dash-board.*\.vercel\.app/)
+    ) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Not allowed by CORS"));
+  },
   credentials: true,
 }));
-app.use(express.json());
 
 mongoose
   .connect(MONGODB_ATLAS_URL)
